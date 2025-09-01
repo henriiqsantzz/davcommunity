@@ -3,30 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Seu Programa — Método Exclusivo</title>
+  <title>Sua Página — Método Exclusivo</title>
   <meta name="description" content="Assista ao vídeo e conheça nosso método de forma rápida e eficaz.">
 
   <style>
     :root{
       --bg1:#2b0f74; --bg2:#6a1ace; --bg3:#8a3cf3;
       --card: rgba(255,255,255,.06); --card-2: rgba(255,255,255,.08);
-      --stroke: rgba(255,255,255,.14);
-      --text:#ffffff; --muted:#e8ddff;
-      --radius: 20px; --shadow: 0 20px 50px rgba(0,0,0,.35), 0 0 80px rgba(138,60,243,.25);
+      --stroke: rgba(255,255,255,.14); --text:#ffffff; --muted:#e8ddff;
+      --radius:20px; --shadow:0 20px 50px rgba(0,0,0,.35),0 0 80px rgba(138,60,243,.25);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
-      font: 500 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font:500 16px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
         radial-gradient(1200px 800px at 20% -10%, #9a6cff33 0%, transparent 60%),
         radial-gradient(900px 700px at 90% 20%, #6a1ace44 0%, transparent 60%),
         linear-gradient(135deg, var(--bg1), var(--bg2) 50%, var(--bg3));
-      background-attachment: fixed;
+      background-attachment:fixed;
     }
-    .container{max-width:1100px;margin-inline:auto;padding:32px 16px 96px}
+    .container{max-width:1100px;margin:0 auto;padding:32px 16px 96px}
     .top{background:linear-gradient(180deg,#4a18b5 0%,#3c1497 100%);padding:28px 0;border-bottom:1px solid #0003;box-shadow:inset 0 -1px 0 #fff2}
-    .headline{text-align:center;max-width:900px;margin:0 auto;padding:0 8px}
+    .headline{text-align:center;max-width:900px;margin:0 auto}
     .headline h1{font-size:clamp(22px,4vw,36px);font-weight:800}
     .headline p{color:var(--muted);margin-top:6px;font-size:clamp(12px,1.6vw,15px)}
 
@@ -35,33 +34,32 @@
     .section{margin-top:26px}
     .title{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:900;font-size:clamp(18px,2.7vw,28px);margin-bottom:16px;text-align:center}
 
+    /* Vídeo */
     .video-wrap{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--stroke)}
-    .aspect{position:relative;width:100%;padding-top:56.25%}
-    .video-note{ text-align:center;color:var(--muted);font-size:clamp(16px,1.25vw,20px);margin-top:20px;line-height:1.55 }
+    .aspect{position:relative;width:100%;padding-top:56.25%}                 /* 16:9 padrão (iframe, vídeo HTML5) */
+    .aspect > iframe, .aspect > video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0b0b0f}
 
-    /* ===== Corrige Converte.ai dentro da .aspect (evita padding duplo) ===== */
-    #videoArea{ position:relative }
-    #videoArea > div[id^="vid_"]{
-      position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; padding:0 !important;
-    }
-    #videoArea > div[id^="vid_"] > img[id^="thumb_"],
-    #videoArea > div[id^="vid_"] > div[id^="backdrop_"]{
-      position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; object-fit:cover !important;
-    }
+    /* Ajuste automático para Converte.ai: remove o padding da moldura e deixa o próprio embed controlar a proporção */
+    #videoArea.has-converte{padding-top:0}
+    #videoArea.has-converte > div[id^="vid_"]{position:relative !important;width:100% !important;height:auto !important;padding-top:56.25% !important}
+    #videoArea.has-converte > div[id^="vid_"] > img[id^="thumb_"],
+    #videoArea.has-converte > div[id^="vid_"] > div[id^="backdrop_"]{position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important}
 
-    /* ===== CTA temporizado ===== */
+    .video-note{ text-align:center; color:var(--muted); font-size:clamp(16px,1.25vw,20px); margin-top:20px; line-height:1.55 }
+
+    /* CTA temporizado */
     .timed-cta{ margin-top:22px }
-    .timed-cta.show{ animation:fadeSlideUp .6s ease both }
-    @keyframes fadeSlideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-    .big-cta{display:block;text-align:center;border-radius:18px;padding:18px 16px;color:#fff;background:linear-gradient(180deg,#b78cff 0%,#8b5cf6 100%);border:1px solid #ffffff40;box-shadow:0 20px 60px #0006,inset 0 2px 0 #fff6,inset 0 -2px 0 #0003;animation:pulseGlow 2.2s ease-in-out infinite}
+    .timed-cta.show{ animation:fadeUp .6s ease both }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .big-cta{display:block;text-align:center;border-radius:18px;padding:18px 16px;color:#fff;background:linear-gradient(180deg,#b78cff 0%,#8b5cf6 100%);border:1px solid #ffffff40;box-shadow:0 20px 60px #0006,inset 0 2px 0 #fff6,inset 0 -2px 0 #0003;animation:pulse 2.2s ease-in-out infinite}
     .big-cta .cta-head{display:flex;align-items:center;justify-content:center;gap:12px;font-size:clamp(22px,3.4vw,32px);font-weight:900}
     .big-cta .bullets{margin-top:10px;font-weight:700;color:#f3e8ff;opacity:.95}
     .big-cta .bullets .dot{display:inline-block;width:8px;height:8px;background:#e9d5ff;border-radius:50%;margin-right:8px;position:relative;top:-1px}
     .big-cta .bullets .sep{opacity:.75;margin:0 10px}
     .cta-hint{text-align:center;color:var(--muted);margin-top:10px;font-size:14px}
-    @keyframes pulseGlow{0%{transform:scale(1);box-shadow:0 20px 60px #0006,0 0 0 0 rgba(139,92,246,0)}50%{transform:scale(1.01);box-shadow:0 24px 70px #0008,0 0 40px 12px rgba(139,92,246,.35)}100%{transform:scale(1);box-shadow:0 20px 60px #0006,0 0 0 0 rgba(139,92,246,0)}}
+    @keyframes pulse{0%{transform:scale(1);box-shadow:0 20px 60px #0006,0 0 0 0 rgba(139,92,246,0)}50%{transform:scale(1.01);box-shadow:0 24px 70px #0008,0 0 40px 12px rgba(139,92,246,.35)}100%{transform:scale(1);box-shadow:0 20px 60px #0006,0 0 0 0 rgba(139,92,246,0)}}
 
-    /* Benefícios (resumo) */
+    /* Benefícios (exemplo) */
     .benefits{margin-top:34px;padding:28px}
     .benefits h2{text-align:center;font-size:clamp(22px,3.6vw,40px);font-weight:900}
     .sub{text-align:center;color:var(--muted);margin:8px 0 22px}
@@ -80,7 +78,7 @@
   <div class="top">
     <div class="headline">
       <h1>Veja o vídeo até o final</h1>
-      <p>Método exclusivo e comprovado — use de forma legítima e responsável.</p>
+      <p>Use de forma legítima e responsável.</p>
     </div>
   </div>
 
@@ -90,12 +88,13 @@
       <h2 id="tvideo" class="title">🎬 Assista ao vídeo até o final para continuar</h2>
 
       <div class="video-wrap">
+        <!-- Para iframes/HTML5, a moldura .aspect dá 16:9. Para Converte.ai, o script abaixo detecta e ajusta. -->
         <div class="aspect" id="videoArea">
           <div id="vid_65a8a9bea331da0009b1d1c4" style="position: relative; width: 100%; padding: 56.25% 0 0;"> <img id="thumb_65a8a9bea331da0009b1d1c4" src="https://images.converteai.net/e25befdb-22aa-48d2-b119-7ea3daf9509d/players/65a8a9bea331da0009b1d1c4/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail"> <div id="backdrop_65a8a9bea331da0009b1d1c4" style=" -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%; "></div> </div> <script type="text/javascript" id="scr_65a8a9bea331da0009b1d1c4"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/e25befdb-22aa-48d2-b119-7ea3daf9509d/players/65a8a9bea331da0009b1d1c4/player.js", s.async=!0,document.head.appendChild(s); </script>
         </div>
       </div>
 
-      <p class="video-note">Descrição breve do conteúdo do vídeo.</p>
+      <p class="video-note">Descrição breve do conteúdo do vídeo (edite este texto).</p>
     </section>
 
     <!-- CTA TEMPORIZADA -->
@@ -104,30 +103,30 @@
          aria-label="Continuar para checkout" target="_blank" rel="noopener noreferrer">
         <div class="cta-head">
           <svg class="play" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          <span>Clique aqui para continuar</span>
+          <span>Continuar</span>
         </div>
         <div class="bullets"><span class="dot"></span> Acesso imediato <span class="sep">•</span> 100% seguro <span class="sep">•</span> Suporte garantido</div>
         <div class="cta-hint">👆 Clique na área acima para continuar</div>
       </a>
     </section>
 
-    <!-- BENEFÍCIOS (exemplo) -->
+    <!-- BENEFÍCIOS (exemplo, opcional) -->
     <section class="benefits card" aria-labelledby="tbenef">
       <h2 id="tbenef">Compatível com NVIDIA & AMD</h2>
       <p class="sub">Veja alguns benefícios do programa</p>
       <div class="grid">
         <article class="benefit">
-          <div class="ring"><img src="logo-beneficio.png" alt="Logo"></div>
+          <div class="ring"><img src="logo-beneficio.png" alt="Logo" /></div>
           <h3>Compatível com qualquer PC</h3>
           <p>Funciona em Windows 10/11 com placas NVIDIA e AMD.</p>
         </article>
         <article class="benefit">
-          <div class="ring"><img src="logo-beneficio.png" alt="Logo"></div>
+          <div class="ring"><img src="logo-beneficio.png" alt="Logo" /></div>
           <h3>Atualizações fáceis</h3>
           <p>Receba melhorias constantes e instale em poucos cliques.</p>
         </article>
         <article class="benefit">
-          <div class="ring"><img src="logo-beneficio.png" alt="Logo"></div>
+          <div class="ring"><img src="logo-beneficio.png" alt="Logo" /></div>
           <h3>Segurança & Suporte</h3>
           <p>Instalação guiada e suporte rápido sempre que precisar.</p>
         </article>
@@ -135,17 +134,30 @@
     </section>
   </main>
 
-  <footer>© <span id="yr"></span> Seu Programa. Todos os direitos reservados.</footer>
+  <footer>© <span id="yr"></span> Sua Marca. Todos os direitos reservados.</footer>
 
   <script>
+    // Configurações rápidas
+    const CTA_DELAY_MS = 300000; // 5 min (para testar rápido, mude para 5000)
+
     // Ano dinâmico
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Mostra o CTA após 5 min (300.000 ms). Para testar rápido, troque para 5000 (5s).
+    // Detecta Converte.ai e ajusta a moldura de proporção
+    (function setupVideoArea(){
+      const area = document.getElementById('videoArea');
+      if(!area) return;
+      // Se o usuário colou um bloco Converte.ai (div id^=vid_), usamos a classe para remover o padding da .aspect
+      if (area.querySelector('div[id^="vid_"]')) {
+        area.classList.add('has-converte');
+      }
+    })();
+
+    // Mostra CTA após o delay
     setTimeout(() => {
       const block = document.getElementById('timedCta');
       if(block){ block.hidden = false; block.classList.add('show'); }
-    }, 300000);
+    }, CTA_DELAY_MS);
   </script>
 </body>
 </html>
