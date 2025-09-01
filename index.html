@@ -77,7 +77,7 @@
     }
     .overlay-btn:hover{ transform:translate(-50%,-52%); box-shadow:0 18px 44px rgba(0,0,0,.4) }
     .overlay-btn.hidden{ opacity:0; pointer-events:none }
-    .video-note{ text-align:center; color:var(--muted); font-size:14px; margin-top:10px }
+    .video-note{ text-align:center; color:var(--muted); font-size: clamp(16px, 1.25vw, 20px); margin-top: 20px; line-height: 1.55; }
 
     /* Benefits */
     .benefits{ margin-top: 34px; padding: 28px }
@@ -145,8 +145,8 @@
 <body>
   <div class="top">
     <div class="headline">
-      <h1>Veja o vídeo até o final e conheça nosso programa</h1>
-      <p>Método exclusivo e comprovado — use de forma legítima e responsável.</p>
+      <h1>Veja o vídeo até o final e remova qualquer ban do FiveM usando este programa</h1>
+      <p>Método Exclusivo e Comprovado</p>
     </div>
   </div>
 
@@ -165,6 +165,9 @@
             allowfullscreen
           ></iframe>
         </div>
+        <!-- Overlay de clique para ativar áudio/avançar -->
+        <button id="overlayGate" class="overlay-btn"><span>🔊 Clique para ouvir</span></button>
+      </div>
 
       <p class="video-note">Descubra o método que já ajudou milhares de jogadores a recuperarem suas contas</p>
     </section>
@@ -177,12 +180,8 @@
           <span>Clique aqui pra tirar seu Ban</span>
         </div>
         <div class="bullets"><span class="dot"></span> Acesso imediato <span class="sep">•</span> 100% seguro <span class="sep">•</span> Suporte garantido</div>
+        <div class="cta-hint">👆 Clique na área acima para continuar</div>
       </a>
-      <p class="cta-hint">🖱️ Clique na área acima para continuar</p>
-      <div class="cta-sub">
-        <div class="offer">⚡ Oferta por tempo limitado</div>
-        <div class="offer-note">Não perca a chance de aproveitar hoje mesmo</div>
-      </div>
     </section>
 
     <!-- BENEFÍCIOS -->
